@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaEnvelope, FaEye, FaEyeSlash, FaLock, FaUserCircle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import GoogleAuth from './GoogleAuth';
@@ -28,7 +28,7 @@ const Register = () => {
     const password = watch("password")
 
     return (
-        <div className="min-h-screen bg-linear-to-t from-black text-white flex items-center justify-center">
+        <div className="min-h-screen text-white flex items-center justify-center">
             <div
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -43,7 +43,6 @@ const Register = () => {
             >
                 <div className="bg-white text-black rounded-2xl shadow-xl p-10">
                     <div className="flex flex-col items-center mb-6">
-                        {/* <FaUserCircle className="text-5xl text-[#FF02CB]" /> */}
                         <h2 className="text-2xl md:text-4xl font-bold text-gray-800 pt-4 font-exo">Register Now</h2>
                     </div>
 
@@ -51,7 +50,7 @@ const Register = () => {
                         className="space-y-4">
                         <div>
                             <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-                                
+
                                 Name
                             </label>
                             <input
@@ -78,7 +77,7 @@ const Register = () => {
                         <div>
                             <div className="flex justify-between items-center">
                                 <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-                                    
+
                                     Password
                                 </label>
                             </div>
@@ -104,7 +103,7 @@ const Register = () => {
 
                         <div>
                             <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-                                
+
                                 Confirm Password
                             </label>
                             <div className="relative">
@@ -128,15 +127,14 @@ const Register = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-linear-to-r from-[#7039E6] to-[#9F62F2] hover:bg-black hover:scale-105 text-white md:text-xl font-bold py-3 rounded-xl transition duration-300 cursor-pointer"
+                            className="w-full hover:scale-105 btn-gradient text-white md:text-xl font-bold py-3 rounded-xl transition duration-300 cursor-pointer"
                         >
                             Sign Up
                         </button>
                     </form>
 
                     <div className="mt-4">
-                        <p className='text-center font-madimi'>Or sign up with</p>
-                        {/* <GoogleLogin></GoogleLogin> */}
+                        <p className='text-center font-medium'>Or sign up with</p>
                         <GoogleAuth></GoogleAuth>
                     </div>
 

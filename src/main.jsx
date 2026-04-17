@@ -8,6 +8,9 @@ import Home from './components/Home/Home.jsx'
 import AllProducts from './components/Products/AllProducts.jsx'
 import AuthProvider from './context/AuthProvider.jsx'
 import Register from './components/Authentication/Register.jsx'
+import MyProducts from './components/Products/MyProducts.jsx'
+import MyBids from './components/MyBids.jsx'
+import ProductDetails from './components/Products/ProductDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,10 +26,22 @@ const router = createBrowserRouter([
         Component: AllProducts
       },
       {
-        path:"register",
-        Component:Register
+        path: "register",
+        Component: Register
       },
-      // priver route rakhte gele component noy element diba and ekta priver router viote elment diye tarpor ei comment kathba vulew age keto na.
+      {
+        path: "myProducts",
+        element: <MyProducts></MyProducts>
+      },
+      {
+        path: "myBids",
+        element: <MyBids></MyBids>
+      },
+      {
+        path: "productDetails/:id",
+        loader: ({ params }) => fetch(`http://localhost:3000/products/${params.id}`),
+        element: <ProductDetails></ProductDetails>
+      }
     ]
   },
 ]);

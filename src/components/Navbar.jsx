@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import { Link, NavLink } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -8,9 +9,17 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const sidebarRef = useRef(null);
 
+  const { user, logout } = useAuth()
+
   const navLinks = <>
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/">All Products</NavLink></li>
+    {user && <>
+      <li><NavLink to="/">My Products</NavLink></li>
+      <li><NavLink to="/myBids">My Bids</NavLink></li>
+      <li><NavLink to="/">Create Product</NavLink></li>
+    </>}
+
   </>
 
 
@@ -49,6 +58,11 @@ export default function Navbar() {
   }, [sidebarOpen]);
 
 
+  const handleLogout = () => {
+    logout()
+  }
+
+
   return (
     <>
       <style>{`
@@ -74,52 +88,50 @@ export default function Navbar() {
         <div className="max-w-350 w-full mx-auto px-6 py-3">
           <div className="flex justify-between items-center w-full transition-all duration-500 ease-in-out">
 
-            {/* <Link to="/"><img className="w-14" src={logo} alt="" /></Link> */}
-            <h3>SmartDeals</h3>
+            <h3 className="text-black">SmartDeals</h3>
 
             <div className="flex gap-10 items-center">
-              <ul className="lg:flex hidden gap-6 text-white text-[17px] font-semibold font-inter italic">
+              <ul className="lg:flex hidden gap-6 text-black text-[17px] font-normal font-inter">
                 {navLinks}
               </ul>
+            </div>
 
-              <div className="flex items-center gap-4">
-                <div>
-                  {/* {
-                    user ?
-                      <div className="relative">
-                        <img
-                          onClick={() => setOpen(!open)}
-                          className="w-12 h-12 object-cover rounded-full border cursor-pointer"
-                          src={user?.photoURL || userLogo}
-                          alt=""
-                        />
+            <div className="flex items-center gap-4">
+              <div>
+                {
+                  user ?
+                    <div className="relative">
+                      <img
+                        onClick={() => setOpen(!open)}
+                        className="w-12 h-12 object-cover rounded-full border cursor-pointer"
+                        src={user?.photoURL || userLogo}
+                        alt=""
+                      />
 
-                        {open && (
-                          <div className="absolute right-1 top-14 w-52 bg-white text-black p-4 shadow rounded-md">
-                            <h3 className="text-center text-xl font-semibold">{user.displayName}</h3>
-                            <Link className="btn bg-[#FF02CB] mt-3 w-full border-none" to="/dashboard">Dashobard</Link>
-                            <button onClick={handleLogout}
-                              className="btn w-full mt-3 bg-red-500 border-none">Logout</button>
-                          </div>
-                        )}
-                      </div>
+                      {open && (
+                        <div className="absolute right-1 top-14 w-52 bg-white text-black p-4 shadow rounded-md">
+                          <h3 className="text-center text-xl font-semibold">{user.displayName}</h3>
+                          <button
+                            onClick={handleLogout}
+                            className="btn w-full mt-3 btn-gradient border-none">Logout</button>
+                        </div>
+                      )}
+                    </div>
 
-                      :
+                    :
 
-                      <Link to="/login"
-                        className="hidden btn rounded-lg bg-red-500 border-none lg:flex gap-4 text-lg py-4 px-6 font-exo hover:rounded-3xl transition-all duration-500 hover:bg-black">Sign In</Link>
-                  } */}
-                </div>
-
-                <button
-                  className="flex lg:hidden"
-                  aria-label="Open"
-                  onClick={() => setSidebarOpen(true)}
-                >
-                  <IoIosMenu size={34} color="#FF02CB"></IoIosMenu>
-                </button>
+                    <Link to="/login"
+                      className="hidden btn rounded-md btn-gradient border-none lg:flex gap-4 text-lg py-4 px-6 font-exo hover:rounded-3xl transition-all text-black duration-500">Sign In</Link>
+                }
               </div>
 
+              <button
+                className="flex lg:hidden"
+                aria-label="Open"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <IoIosMenu size={34} color="#FF02CB"></IoIosMenu>
+              </button>
             </div>
 
           </div>
@@ -132,7 +144,7 @@ export default function Navbar() {
         aria-hidden={!sidebarOpen}
       >
         <div className="flex text-black justify-between items-center">
-          <h3 className="text-3xl font-marker bg-linear-to-b from-black to-[#FF02CB] bg-clip-text text-transparent">Elite Arena</h3>
+          <h3 className="text-3xl font-marker bg-linear-to-b from-black to-[#FF02CB] bg-clip-text text-transparent">SmartDeals</h3>
           <button
             aria-label="Close"
             onClick={() => setSidebarOpen(false)}

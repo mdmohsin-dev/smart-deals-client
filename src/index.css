@@ -7,3 +7,11 @@
   --color-primary: blue;
   --color-secondary: teal;
 }
+
+.btn-gradient{
+  background: linear-gradient(to right, #7039E6, #9F62F2);
+}
+
+.navbar .active{
+  color: #7039E6;font-weight: 600;
+}
