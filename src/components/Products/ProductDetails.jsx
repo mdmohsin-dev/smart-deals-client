@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const ProductDetails = () => {
     const product = useLoaderData()
@@ -17,9 +18,11 @@ const ProductDetails = () => {
     const { user } = useAuth()
 
     useEffect(() => {
-        fetch(`http://localhost:3000/bids/byProduct/${productId}`)
-            .then(res => res.json())
-            .then(data => setBids(data))
+        axios.get(`http://localhost:3000/bids/byProduct/${productId}`)
+        .then(data => setBids(data.data))
+        // fetch(`http://localhost:3000/bids/byProduct/${productId}`)
+        //     .then(res => res.json())
+        //     .then(data => setBids(data))
     }, [productId])
 
     const handleBidModalOpen = () => {

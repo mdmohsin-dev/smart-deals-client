@@ -17,7 +17,7 @@ export default function Navbar() {
     {user && <>
       <li><NavLink to="/">My Products</NavLink></li>
       <li><NavLink to="/myBids">My Bids</NavLink></li>
-      <li><NavLink to="/">Create Product</NavLink></li>
+      <li><NavLink to="/createProduct">Create Product</NavLink></li>
     </>}
 
   </>
@@ -69,7 +69,7 @@ export default function Navbar() {
 
         /* Frosted glass after scroll */
         .navbar.scrolled {
-          background: rgba(8, 8, 13, 0.52);
+          background:white;
           backdrop-filter: blur(18px);
           -webkit-backdrop-filter: blur(18px);
         }
@@ -88,7 +88,7 @@ export default function Navbar() {
         <div className="max-w-350 w-full mx-auto px-6 py-3">
           <div className="flex justify-between items-center w-full transition-all duration-500 ease-in-out">
 
-            <h3 className="text-black">SmartDeals</h3>
+            <h3 className="text-black text-3xl font-bold">Smart<span className="text-[#8E53EE]">Deals</span></h3>
 
             <div className="flex gap-10 items-center">
               <ul className="lg:flex hidden gap-6 text-black text-[17px] font-normal font-inter">

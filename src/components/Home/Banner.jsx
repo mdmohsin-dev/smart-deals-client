@@ -1,8 +1,9 @@
 import { Link } from "react-router";
+import bg from "../../assets/car2.jpg"
 
 const Banner = () => {
     return (
-        <div className="min-h-screen bg-linear-to-r from-[#f4ddf4] to-[#c3ecec] flex flex-col gap-10 justify-center items-center text-black">
+        <div style={{ backgroundImage: `url(${bg})` }} className="min-h-screen bg-no-repeat bg-cover bg-center flex flex-col gap-10 justify-center items-center text-black">
             <h3 className="text-7xl font-bold w-1/2 text-center">Deal your <span className="text-[#7039E6]">Products</span> in a <span className="text-[#7039E6]">Smart</span> way !</h3>
             <p>SmartDeals helps you sell, resell, and shop from trusted local sellers — all in one place!</p>
             <div className="flex gap-5">

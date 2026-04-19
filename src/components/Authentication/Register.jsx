@@ -29,17 +29,7 @@ const Register = () => {
 
     return (
         <div className="min-h-screen text-white flex items-center justify-center">
-            <div
-                initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 10,
-                    duration: 1.5,
-                }}
-
-                className="w-[90%] md:w-[70%] max-w-md"
+            <div className="w-[90%] md:w-[70%] max-w-md"
             >
                 <div className="bg-white text-black rounded-2xl shadow-xl p-10">
                     <div className="flex flex-col items-center mb-6">

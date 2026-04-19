@@ -1,9 +1,11 @@
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 
 const GoogleAuth = () => {
 
+    const navigate = useNavigate()
     const { googleLogin } = useAuth()
 
     const handleGoogleLogin = () => {
@@ -28,7 +30,10 @@ const GoogleAuth = () => {
                     .then(data => {
                         console.log(data)
                     })
+
+                    navigate("/")
             })
+
 
             .catch(err => console.log(err))
     }

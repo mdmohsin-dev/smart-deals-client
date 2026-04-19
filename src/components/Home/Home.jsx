@@ -1,3 +1,4 @@
+import Footer from '../Footer';
 import LatestProducts from '../Products/LatestProducts';
 import Banner from './Banner';
 
@@ -8,6 +9,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <LatestProducts latestProductsPromise={latestProductsPromise}></LatestProducts>
+            <Footer></Footer>
         </div>
     );
 };

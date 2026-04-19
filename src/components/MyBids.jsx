@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const MyBids = () => {
 
     const { user } = useAuth()
+    const axiosSecure = useAxiosSecure()
 
     const [bids, setBids] = useState([])
 
     useEffect(() => {
-        if (user?.email) {
-            fetch(`http://localhost:3000/bids?email=${user?.email}`)
-                .then(res => res.json())
-                .then(data => setBids(data))
-        }
-    }, [user?.email])
+        axiosSecure.get(`/bids?email=${user?.email}`)
+            .then(data => setBids(data.data))
+    }, [user, axiosSecure])
 
 
     const handleDeleteBid = (_id) => {
