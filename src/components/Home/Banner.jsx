@@ -34,9 +34,9 @@ export default function CarRentalBanner() {
     };
 
     return (
-        <section className="relative w-full overflow-hidden bg-white border border-blue-700">
+        <section className="relative w-full overflow-hidden bg-white">
             <div className="my-20">
-                <div className="mx-auto flex max-w-350 flex-col-reverse border border-red-700 items-center gap-10 px-6 py-12 sm:px-10 lg:flex-row lg:gap-6">
+                <div className="mx-auto flex max-w-350 flex-col-reverse items-center gap-10 px-6 py-12 sm:px-10 lg:flex-row lg:gap-6">
                     {/* Left: text content */}
                     <motion.div
                         variants={containerVariants}
@@ -98,7 +98,9 @@ export default function CarRentalBanner() {
                         />
                     </motion.div>
                 </div>
-                
+                <div className="mt-10">
+                    <BrandLogoSlider />
+                </div>
             </div>
         </section>
     );
