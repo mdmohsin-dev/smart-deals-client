@@ -9,7 +9,7 @@ const PrivetRoute = ({ children }) => {
     if (loading) {
         return <div className="min-h-screen text-black flex justify-center items-center"><h1>Loading...</h1></div>
     }
-
+    
     if (user) {
        return children
     }

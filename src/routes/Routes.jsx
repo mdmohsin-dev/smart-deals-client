@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
                 Component: Home
             },
             {
-                path: "allProducts",
+                path: "all-products",
                 Component: AllProducts
             },
             {

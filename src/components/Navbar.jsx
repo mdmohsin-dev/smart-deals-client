@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const navLinks = <>
     <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/">All Products</NavLink></li>
+    <li><NavLink to="/all-products">All Products</NavLink></li>
     {user && <>
       <li><NavLink to="/">My Products</NavLink></li>
       <li><NavLink to="/myBids">My Bids</NavLink></li>
