@@ -1,17 +1,105 @@
-import { Link } from "react-router";
-import bg from "../../assets/car2.jpg"
+import { motion, useReducedMotion } from "framer-motion";
+import car from "../../assets/red-car-3.png"
+import BrandLogoSlider from "../Brandlogoslider";
 
-const Banner = () => {
+export default function CarRentalBanner() {
+    const prefersReducedMotion = useReducedMotion();
+
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: prefersReducedMotion ? 0 : 0.15,
+                delayChildren: prefersReducedMotion ? 0 : 0.1,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 36 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+        },
+    };
+
+    const carVariants = {
+        hidden: { opacity: 0, x: prefersReducedMotion ? 0 : 160 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 2, ease: [0.22, 1, 0.36, 1], delay: 0.15 },
+        },
+    };
+
     return (
-        <div style={{ backgroundImage: `url(${bg})` }} className="min-h-screen bg-no-repeat bg-cover bg-center flex flex-col gap-10 justify-center items-center text-black">
-            <h3 className="text-7xl font-bold w-1/2 text-center">Deal your <span className="text-[#7039E6]">Products</span> in a <span className="text-[#7039E6]">Smart</span> way !</h3>
-            <p>SmartDeals helps you sell, resell, and shop from trusted local sellers — all in one place!</p>
-            <div className="flex gap-5">
-                <Link className="btn bg-[#8D53ED] border-none">Watch All Products</Link>
-                <Link className="btn btn-outline text-[#8D53ED] hover:bg-[#8D53ED] hover:text-white border border-[#8D53ED]">Post An Product</Link>
-            </div>
-        </div>
-    );
-};
+        <section className="relative w-full overflow-hidden bg-white border border-blue-700">
+            <div className="my-20">
+                <div className="mx-auto flex max-w-350 flex-col-reverse border border-red-700 items-center gap-10 px-6 py-12 sm:px-10 lg:flex-row lg:gap-6">
+                    {/* Left: text content */}
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="z-10 w-full max-w-xl text-center lg:w-1/2 lg:text-left"
+                    >
+                        <motion.h1
+                            variants={itemVariants}
+                            className="text-4xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
+                        >
+                            Buy, sell &amp; rent
+                            <br />
+                            <span className="text-red-600">reputable cars</span>
+                        </motion.h1>
 
-export default Banner;
+                        <motion.p
+                            variants={itemVariants}
+                            className="mx-auto mt-5 max-w-md text-base text-gray-500 lg:mx-0"
+                        >
+                            Buy and sell reputable cars. Renting a car is easy and fast with
+                            Topcar
+                        </motion.p>
+
+                        <motion.div
+                            variants={itemVariants}
+                            className="mt-8 flex items-center justify-center gap-6 lg:justify-start"
+                        >
+                            <div>
+                                <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl">
+                                    50+
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">Car brands</p>
+                            </div>
+
+                            <div className="h-10 w-px bg-gray-300" />
+
+                            <div>
+                                <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl">
+                                    10k+
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">Clients</p>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Right: car image */}
+                    <motion.div
+                        variants={carVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="relative w-full lg:w-1/2 lg:translate-x-6 xl:translate-x-12"
+                    >
+                        {/* TODO: replace src below with your real car image */}
+                        <img
+                            src={car}
+                            alt="Car"
+                            className="h-auto w-full"
+                        />
+                    </motion.div>
+                </div>
+                
+            </div>
+        </section>
+    );
+}

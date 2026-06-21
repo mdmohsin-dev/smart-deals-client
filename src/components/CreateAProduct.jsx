@@ -7,7 +7,6 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 const CreateAProduct = () => {
 
     const { user } = useAuth()
-    // const axiosInstance = useAxios()
     const axiosSecure = useAxiosSecure()
     const { handleSubmit, register, watch } = useForm()
 
@@ -35,7 +34,7 @@ const CreateAProduct = () => {
             <div className="w-[90%] md:w-[70%] max-w-md">
                 <div className="bg-white text-black rounded-2xl shadow-xl p-10">
                     <div className="flex flex-col items-center mb-6">
-                        <h2 className="text-2xl md:text-4xl font-bold text-gray-800 pt-4 font-exo">Register Now</h2>
+                        <h2 className="text-2xl md:text-4xl font-bold text-gray-800 pt-4 font-exo">Create a Product</h2>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)}

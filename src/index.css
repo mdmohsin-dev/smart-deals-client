@@ -8,10 +8,14 @@
   --color-secondary: teal;
 }
 
-.btn-gradient{
+.btn-gradient {
   background: linear-gradient(to right, #7039E6, #9F62F2);
 }
 
-.navbar .active{
-  color: #7039E6;font-weight: 600;
+.active {
+  background: linear-gradient(to right, #0a51ea, #6e28e7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
 }

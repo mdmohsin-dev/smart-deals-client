@@ -1,18 +1,20 @@
 import React from 'react';
 import Product from './Product';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import useAxios from '../../hooks/useAxios';
 
 const AllProducts = () => {
-    const axiosSecure = useAxiosSecure()
+    const publicUrl = useAxios()
 
     const { data: products = [], isLoading, isError, error } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/products');
+            const res = await publicUrl.get('/products');
             return res.data;
         }
     });
+
+    console.log(products)
 
     if (isLoading) {
         return (
@@ -31,13 +33,13 @@ const AllProducts = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-10 text-black">
-            <h2 className="text-2xl font-semibold mb-6">All Products</h2>
+        <div className="max-w-350 mx-auto px-4 py-10 text-black">
+            <h2 className="text-2xl font-semibold mb-6 text-center mt-28">All Products</h2>
 
             {products.length === 0 ? (
                 <p className="text-center text-gray-500 mt-6">No products found.</p>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {products.map(product => (
                         <Product key={product._id} product={product} />
                     ))}
