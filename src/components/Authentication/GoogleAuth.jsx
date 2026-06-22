@@ -20,7 +20,7 @@ const GoogleAuth = () => {
                 }
 
                 // save user in the database
-                fetch("http://localhost:3000/users", {
+                fetch("https://smart-deals-server-teal.vercel.app/users", {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'
