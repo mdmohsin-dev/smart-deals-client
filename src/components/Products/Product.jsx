@@ -3,8 +3,7 @@ import { BiMapPin } from 'react-icons/bi';
 import { Link } from 'react-router';
 
 const Product = ({ product }) => {
-    const { _id, title, condition, price_min, price_max, category, image, location } = product;
-
+    const { _id, title, condition, price_min, price_max, category, image, location, description, specialties } = product;
 
     return (
         <div className="group rounded-2xl border border-transparent hover:border-[#5b8def] transition-all duration-700">
@@ -35,25 +34,39 @@ const Product = ({ product }) => {
                         )}
                     </div>
 
-                    <p className="text-sm text-gray-500 mt-2 line-clamp-2">
-                        Experience top-notch performance and comfort with this{" "}
+                    <p className="text-sm text-gray-500 mt-3 line-clamp-2">
+                       {description}
                         {condition?.toLowerCase()} {title}.
                     </p>
 
-                    <div className="border-t border-gray-100 mt-4 pt-4 flex items-center justify-between">
+                    {/* Specialties */}
+                    {specialties?.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-4">
+                            {specialties.map((specialty, idx) => (
+                                <span
+                                    key={idx}
+                                    className="bg-[#8A50ED]/10 text-[#8A50ED] text-xs font-medium px-2.5 py-1 rounded-full"
+                                >
+                                    {specialty}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="border-t border-gray-100 mt-5 pt-4 flex items-center justify-between">
                         <div>
                             <p className="text-xs text-gray-400 uppercase tracking-wide">
                                 Price Range
                             </p>
 
-                            <p className="text-[#8A50ED] font-bold text-xl">
-                                ${price_min} - ${price_max}
+                            <p className="font-bold text-xl pt-1">
+                                <span className='text-blue-600'>${price_min}</span> - <span className='text-violet-600'>${price_max}</span>
                             </p>
                         </div>
 
                         <Link
                             to={`/productDetails/${_id}`}
-                            className="bg-linear-to-r from-[#8A50ED] to-[#5b8def] text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity"
+                            className="items-center gap-2 rounded-md py-1.5 px-4 font-medium text-white bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-500"
                         >
                             View Details
                         </Link>

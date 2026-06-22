@@ -41,7 +41,7 @@ const Reviews = () => {
     return (
         <div className='max-w-350 w-11/12 mx-auto mt-36 text-black'>
             <div className='text-center lg:w-8/12 w-full mx-auto'>
-                <h3 className='text-4xl text-[#104a51] font-bold'>What our customers are sayings</h3>
+                <h3 className='text-4xl font-bold'>What our customers are sayings</h3>
                 <p className='pt-5'>Enhance posture, mobility, and well-being effortlessly with Posture Pro. Achieve proper alignment, reduce pain, and strengthen your body with ease!</p>
             </div>
 
@@ -60,13 +60,13 @@ const Reviews = () => {
                 <div className='absolute -top-14 right-0 z-20 flex gap-3'>
                     <button
                         ref={prevRef}
-                        className='w-10 h-10 flex items-center justify-center rounded-full border border-[#104a51] text-[#104a51] hover:bg-[#104a51] hover:text-white transition cursor-pointer'
+                        className='w-10 h-10 flex items-center justify-center rounded-full border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition cursor-pointer'
                     >
                         <FaArrowLeft size={16} />
                     </button>
                     <button
                         ref={nextRef}
-                        className='w-10 h-10 flex items-center justify-center rounded-full border border-[#104a51] text-[#104a51] hover:bg-[#104a51] hover:text-white transition cursor-pointer'
+                        className='w-10 h-10 flex items-center justify-center rounded-full border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition cursor-pointer'
                     >
                         <FaArrowRight size={16} />
                     </button>

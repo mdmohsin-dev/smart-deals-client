@@ -8,7 +8,11 @@ const Footer = () => {
             <div className="max-w-350 mx-auto">
                 <div className="flex flex-col lg:flex-row justify-between xl:gap-28 lg:gap-20 gap-14 items-start">
                     <div className="lg:w-1/3 md:w-full">
-                        <h3 className="text-white text-3xl font-bold">Smart<span className="text-[#8E53EE]">Deals</span></h3>
+                        <Link to="/">
+                            <h3 className="text-2xl md:text-3xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                                Smart Deals
+                            </h3>
+                        </Link>
                         <p className="text-gray-400 pt-4">Your trusted marketplace for authentic local products. Discover the best deals from across Bangladesh.</p>
                     </div>
                     <div className="lg:w-2/3 md:w-full flex flex-col md:flex-row gap-10 md:gap-0 justify-between">

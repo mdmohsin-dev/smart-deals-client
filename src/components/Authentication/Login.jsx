@@ -103,7 +103,7 @@ const Login = () => {
 
                         <button
                             type="submit"
-                            className="w-full hover:scale-105 btn-gradient text-white md:text-xl font-bold py-3 rounded-xl transition duration-300 cursor-pointer"
+                            className="w-full md:text-xl cursor-pointer font-bold py-3 rounded-md px-4 text-white bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-500"
                         >
                             Login
                         </button>
@@ -118,7 +118,7 @@ const Login = () => {
                         <p className="text-sm text-gray-700">Don't have an account?</p>
                         <Link
                             to="/register"
-                            className="text-[#FF02CB] text-sm font-medium hover:text-[#FF0000] hover:underline hover:scale-105 transition"
+                            className="text-blue-600 text-sm font-medium hover:text-violet-600 hover:underline hover:scale-105 transition"
                         >
                             Register
                         </Link>

@@ -33,13 +33,13 @@ const AllProducts = () => {
     }
 
     return (
-        <div className="max-w-350 mx-auto px-4 py-10 text-black">
+        <div className="max-w-360 mx-auto px-4 py-10 text-black">
             <h2 className="text-2xl font-semibold mb-6 text-center mt-28">All Products</h2>
 
             {products.length === 0 ? (
                 <p className="text-center text-gray-500 mt-6">No products found.</p>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
                     {products.map(product => (
                         <Product key={product._id} product={product} />
                     ))}

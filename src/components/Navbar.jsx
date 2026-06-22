@@ -34,14 +34,14 @@ export default function Navbar() {
     }
   };
 
-  // Frosted glass after scroll
+  
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close sidebar on outside click
+  
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (
@@ -56,7 +56,7 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [sidebarOpen]);
 
-  // Close profile panel on outside click (desktop dropdown click-away)
+  
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (
@@ -71,7 +71,7 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [profileOpen]);
 
-  // Lock body scroll when mobile sidebar is open
+  
   useEffect(() => {
     document.body.style.overflow = sidebarOpen ? "hidden" : "";
     return () => (document.body.style.overflow = "");
@@ -88,21 +88,15 @@ export default function Navbar() {
     <>
       {/* NAVBAR */}
       <nav
-        className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-          scrolled
-            ? "bg-white/80 backdrop-blur-md shadow-sm"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-[1400px] w-full mx-auto px-6 py-3">
+        className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled
+          ? "bg-white/80 backdrop-blur-md shadow-sm"
+          : "bg-transparent"} py-2`}>
+        <div className="max-w-360 w-11/12 mx-auto">
           <div className="flex justify-between items-center w-full">
 
             <Link to="/">
-              <h3 className="text-black text-2xl md:text-3xl font-bold">
-                Smart
-                <span className="bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                  Deals
-                </span>
+              <h3 className="text-2xl md:text-3xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                Smart Deals
               </h3>
             </Link>
 
@@ -135,9 +129,8 @@ export default function Navbar() {
                   {/* Backdrop — mobile only, gives the sheet a modal feel */}
                   <div
                     onClick={() => setProfileOpen(false)}
-                    className={`fixed inset-0 z-[1090] bg-black/40 transition-opacity duration-300 lg:hidden ${
-                      profileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-                    }`}
+                    className={`fixed inset-0 z-[1090] bg-black/40 transition-opacity duration-300 lg:hidden ${profileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                      }`}
                   />
 
                   {/* Profile panel — dropdown card on desktop, bottom sheet on mobile */}
@@ -145,10 +138,9 @@ export default function Navbar() {
                     className={`fixed inset-x-0 bottom-0 z-[1100] lg:absolute lg:inset-x-auto lg:bottom-auto lg:right-0 lg:top-14 lg:z-50 lg:w-72
                       bg-white text-black rounded-t-3xl lg:rounded-2xl shadow-2xl border border-gray-100 overflow-hidden
                       transition-all duration-300 ease-out origin-top-right
-                      ${
-                        profileOpen
-                          ? "translate-y-0 opacity-100 pointer-events-auto"
-                          : "translate-y-full lg:translate-y-2 opacity-0 pointer-events-none lg:scale-95"
+                      ${profileOpen
+                        ? "translate-y-0 opacity-100 pointer-events-auto"
+                        : "translate-y-full lg:translate-y-2 opacity-0 pointer-events-none lg:scale-95"
                       }`}
                   >
                     {/* mobile drag handle */}
@@ -222,25 +214,20 @@ export default function Navbar() {
 
       {/* MOBILE SIDEBAR OVERLAY */}
       <div
-        className={`fixed inset-0 z-[1090] bg-black/40 transition-opacity duration-300 lg:hidden ${
-          sidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-[1090] bg-black/40 transition-opacity duration-300 lg:hidden ${sidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
       />
 
       {/* MOBILE SIDEBAR */}
       <aside
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-[1100] w-72 h-dvh bg-[#EDE8E3] pl-6 pr-4 pt-6 transition-transform duration-400 ease-in-out lg:hidden ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 z-[1100] w-72 h-dvh bg-[#EDE8E3] pl-6 pr-4 pt-6 transition-transform duration-400 ease-in-out lg:hidden ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
         aria-hidden={!sidebarOpen}
       >
         <div className="flex text-black justify-between items-center">
-          <h3 className="text-2xl font-bold">
-            Smart
-            <span className="bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-              Deals
-            </span>
+          <h3 className="text-2xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+            Smart Deals
           </h3>
           <button aria-label="Close menu" onClick={() => setSidebarOpen(false)}>
             <IoMdClose size={30} className="text-black" />

@@ -15,7 +15,8 @@ const GoogleAuth = () => {
                 const newUser = {
                     name: result.user.displayName,
                     email: result.user.email,
-                    image: result.user.displayURL
+                    image: result.user.photoURL,
+                    createdAt: new Date()
                 }
 
                 // save user in the database
@@ -31,7 +32,7 @@ const GoogleAuth = () => {
                         console.log(data)
                     })
 
-                    navigate("/")
+                navigate("/")
             })
 
 
