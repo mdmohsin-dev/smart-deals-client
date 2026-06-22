@@ -16,13 +16,13 @@ export default function Navbar() {
 
   const navLinks = (
     <>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/all-products">All Products</NavLink></li>
+      <li className="hover:text-blue-600 font-semibold"><NavLink to="/">Home</NavLink></li>
+      <li className="hover:text-blue-600 font-semibold"><NavLink to="/all-products">All Products</NavLink></li>
       {user && (
         <>
-          <li><NavLink to="/myProducts">My Products</NavLink></li>
-          <li><NavLink to="/myBids">My Bids</NavLink></li>
-          <li><NavLink to="/createProduct">Create Product</NavLink></li>
+          <li className="hover:text-blue-600 font-semibold"><NavLink to="/myProducts">My Products</NavLink></li>
+          <li className="hover:text-blue-600 font-semibold"><NavLink to="/myBids">My Bids</NavLink></li>
+          <li className="hover:text-blue-600 font-semibold"><NavLink to="/createProduct">Create Product</NavLink></li>
         </>
       )}
     </>
@@ -96,7 +96,7 @@ export default function Navbar() {
 
             <Link to="/">
               <h3 className="text-2xl md:text-3xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                Smart Deals
+                CarVerse
               </h3>
             </Link>
 
@@ -135,7 +135,7 @@ export default function Navbar() {
 
                   {/* Profile panel — dropdown card on desktop, bottom sheet on mobile */}
                   <div
-                    className={`fixed inset-x-0 bottom-0 z-[1100] lg:absolute lg:inset-x-auto lg:bottom-auto lg:right-0 lg:top-14 lg:z-50 lg:w-72
+                    className={`fixed inset-x-0 bottom-0 z-[1100] lg:absolute lg:inset-x-auto lg:bottom-auto lg:right-0 lg:top-14 lg:z-50 lg:w-56
                       bg-white text-black rounded-t-3xl lg:rounded-2xl shadow-2xl border border-gray-100 overflow-hidden
                       transition-all duration-300 ease-out origin-top-right
                       ${profileOpen
@@ -150,10 +150,10 @@ export default function Navbar() {
 
                     {/* User info header */}
                     <div className="px-5 pt-5 pb-5 bg-linear-to-r from-blue-600/5 to-violet-600/5">
-                      <div className="flex items-center gap-4">
+                      <div>
                         {user?.photoURL ? (
                           <img
-                            className="w-16 h-16 object-cover rounded-full border-2 border-violet-200 shadow"
+                            className="w-20 h-20 object-cover rounded-full border-2 border-violet-200 shadow"
                             src={user.photoURL}
                             alt={user.displayName || "User"}
                           />
@@ -167,7 +167,7 @@ export default function Navbar() {
                             {user.displayName || "User"}
                           </p>
                           {user?.email && (
-                            <p className="flex items-center gap-1.5 text-sm text-gray-500 truncate mt-1">
+                            <p className="flex items-center gap-1.5 text-xs text-gray-500 truncate mt-1">
                               <BiEnvelope size={14} className="shrink-0" />
                               <span className="truncate">{user.email}</span>
                             </p>
@@ -182,7 +182,7 @@ export default function Navbar() {
                     <div className="p-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] lg:pb-3">
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-white font-medium bg-linear-to-r from-blue-600 to-violet-600 hover:opacity-90 transition-opacity cursor-pointer"
+                        className="w-full flex items-center justify-center gap-2 py-2 rounded-xl text-white font-medium bg-linear-to-r from-blue-600 to-violet-600 hover:opacity-90 transition-opacity cursor-pointer"
                       >
                         <BiLogOut size={16} />
                         Logout
@@ -227,7 +227,7 @@ export default function Navbar() {
       >
         <div className="flex text-black justify-between items-center">
           <h3 className="text-2xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-            Smart Deals
+            CarVerse
           </h3>
           <button aria-label="Close menu" onClick={() => setSidebarOpen(false)}>
             <IoMdClose size={30} className="text-black" />

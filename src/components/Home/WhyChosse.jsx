@@ -1,6 +1,7 @@
 import { FaCrown, FaHeadset } from "react-icons/fa";
 import { FaTag } from "react-icons/fa6";
 import { IoShieldCheckmark } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const features = [
     {
@@ -37,6 +38,32 @@ const features = [
     },
 ];
 
+// Container variant — stagger children গুলোকে
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15, // প্রতিটা card 0.15s delay এ আসবে
+        },
+    },
+};
+
+// প্রতিটা card এর animation
+const cardVariants = {
+    hidden: {
+        opacity: 0,
+        y: 40,
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5,
+            ease: "easeOut",
+        },
+    },
+};
+
 export default function WhyChoose() {
     return (
         <section className="bg-[#FBFAFF]">
@@ -46,7 +73,7 @@ export default function WhyChoose() {
                     <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
                         Why Choose{" "}
                         <span className="bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                            Smart Deals
+                            CarVerse
                         </span>
                         ?
                     </h2>
@@ -56,11 +83,18 @@ export default function WhyChoose() {
                     </p>
                 </div>
 
-                {/* Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Cards — motion.div দিয়ে wrap */}
+                <motion.div
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     {features.map(({ icon: Icon, title, description, iconBg, hoverBorder }) => (
-                        <div
+                        <motion.div
                             key={title}
+                            variants={cardVariants}
                             className={`bg-white rounded-2xl p-6 border border-transparent shadow-sm transition-colors duration-500 ${hoverBorder}`}
                         >
                             <div
@@ -72,9 +106,9 @@ export default function WhyChoose() {
                             <p className="text-sm text-gray-500 leading-relaxed">
                                 {description}
                             </p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );

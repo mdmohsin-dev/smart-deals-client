@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { BiMapPin } from 'react-icons/bi';
+import { FaUserCircle } from "react-icons/fa";
 
 const ProductDetails = () => {
     const { id: productId } = useParams()
@@ -95,14 +96,14 @@ const ProductDetails = () => {
 
     return (
         <div className='min-h-screen max-w-360 w-11/12 mx-auto text-black'>
-            <div className='pt-44 flex gap-8'>
+            <div className='lg:py-24 py-14 flex flex-col lg:flex-row gap-8'>
 
                 {/* Product Details */}
-                <div className='w-1/2'>
+                <div className='lg:w-1/2'>
                     <div className='flex justify-center items-center'>
                         <img src={image} className='rounded-lg w-full' alt="" />
                     </div>
-                    <div className='flex flex-col gap-6 mt-4'>
+                    <div className='flex flex-col gap-6 mt-8'>
                         <p className='text-5xl'>{title} <span className='text-2xl'>(For sale)</span></p>
                         <p>{description}</p>
 
@@ -119,10 +120,10 @@ const ProductDetails = () => {
                             </div>
                         </div>
 
-                        <div className='flex justify-between items-center border-t border-dashed border-gray-300 pt-4'>
+                        <div className='flex flex-col xl:flex-row justify-between gap-5 xl:gap-0 xl:items-center border-t border-dashed border-gray-300 pt-4'>
                             <div>
                                 <div className='flex gap-2'>
-                                    <img src={seller_image} className='w-14 rounded-full' alt="" />
+                                    {user ? <img src={seller_image} className='w-14 rounded-full' alt="" />: <FaUserCircle color /> }
                                     <div>
                                         <p className='text-2xl'>{seller_name}</p>
                                         <p>{email}</p>
@@ -189,7 +190,7 @@ const ProductDetails = () => {
                 </div>
 
                 {/* bid for tis product */}
-                <div className='w-1/2'>
+                <div className='lg:w-1/2'>
                     <h3 className='text-3xl font-semibold'>Bids for this Product: {bids.length}</h3>
                     <div>
                         {
@@ -212,7 +213,7 @@ const ProductDetails = () => {
                                                 bids.map((bid, idx) => <tr key={bid._id ?? idx}>
                                                     <th>{idx + 1}</th>
                                                     <td><div className='flex gap-2 items-center'><img className='w-14 h-14 rounded-full' src={bid.buyer_image} alt="" />{bid.buyer_name}</div></td>
-                                                    <td>{bid.bid_price}</td>
+                                                    <td>${bid.bid_price}</td>
                                                     {/* <td><div className='flex gap-3'>
                                             <button className='btn btn-outline'>Accept Offer</button>
                                             <button className='btn btn-outline'>Reject Offer</button>

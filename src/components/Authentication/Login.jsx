@@ -6,8 +6,11 @@ import { motion } from 'framer-motion';
 import GoogleAuth from './GoogleAuth';
 import useAuth from '../../hooks/useAuth';
 
-const Login = () => {
+const inputClass =
+    'w-full border border-[#F1F5F9] bg-[#F8FAFC] rounded-xl px-4 py-3 text-sm text-gray-900 ' +
+    'focus:outline-none focus:border-orange-400 focus:bg-white transition-all duration-200 placeholder:text-gray-400';
 
+const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState('');
 
@@ -21,109 +24,102 @@ const Login = () => {
     const onSubmit = (data) => {
         const { email, password } = data;
         setLoginError('');
-
         signIn(email, password)
             .then(result => {
                 console.log(result.user);
                 navigate(from, { replace: true });
             })
-            .catch(err => {
-                console.log(err);
-                setLoginError('Invalid email or password');
-            });
+            .catch(() => setLoginError('Invalid email or password'));
     };
 
     return (
-        <div className="min-h-screen text-white flex items-center justify-center overflow-hidden">
+        <div
+            className="min-h-screen flex items-center justify-center px-4"
+            style={{ background: 'linear-gradient(160deg, #FFF7ED 0%, #FDF2FF 50%, #EEF2FF 100%)' }}
+        >
             <motion.div
-                initial={{ y: -120, opacity: 0 }}
+                initial={{ y: -80, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{type: 'spring', stiffness: 80, damping: 12, duration: 0.6, ease: 'easeOut' }}
-                className="w-[90%] md:w-[70%] max-w-md"
+                transition={{ type: 'spring', stiffness: 80, damping: 14 }}
+                className="w-full max-w-md bg-white rounded-3xl p-8 md:p-10"
+                style={{ border: '1px solid rgba(0,0,0,0.06)' }}
             >
-                <div className="bg-white text-black rounded-2xl shadow-xl p-10">
-                    <div className="flex flex-col items-center mb-6">
-                        <h2 className="text-2xl md:text-4xl font-bold text-gray-800 pt-4 font-exo">Login Now</h2>
+                {/* Header */}
+                <span className="inline-block text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
+                    style={{ background: 'linear-gradient(135deg,#FDE68A,#FCA5A5)', color: '#92400E' }}>
+                    ✦ Welcome back
+                </span>
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-1 font-exo">Sign in</h2>
+                <p className="text-sm text-gray-400 mb-7">Good to see you again</p>
+
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    {/* Email */}
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-semibold text-gray-600">Email</label>
+                        <input
+                            type="email"
+                            {...register('email', { required: true })}
+                            className={inputClass}
+                            placeholder="you@example.com"
+                        />
+                        {errors.email && <p className="text-red-500 text-xs">Email is required</p>}
                     </div>
 
-                    <form onSubmit={handleSubmit(onSubmit)}
-                        className="space-y-4">
-                        <div>
-                            <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-                                Email
-                            </label>
+                    {/* Password */}
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-semibold text-gray-600">Password</label>
+                        <div className="relative">
                             <input
-                                type="email"
-                                {...register('email', { required: true })}
-                                className="mt-1 w-full p-3 border border-gray-300 rounded-xl focus:bg-black text-black focus:text-white focus:outline-none focus:ring-2 focus:ring-[#FF02CB]"
-                                placeholder="you@example.com"
+                                type={showPassword ? 'text' : 'password'}
+                                {...register('password', { required: true })}
+                                className={inputClass + ' pr-11'}
+                                placeholder="••••••••"
                             />
-                            {errors.email && (
-                                <p className="text-red-500 text-sm mt-1">Email is required</p>
-                            )}
-                        </div>
-
-                        <div>
-                            <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-                                Password
-                            </label>
-                            <div className="relative">
-                                <input
-                                    {...register('password', { required: true })}
-                                    type={showPassword ? 'text' : 'password'}
-                                    className="mt-1 w-full p-3 border border-gray-300 rounded-xl focus:bg-black text-black focus:text-white focus:outline-none focus:ring-2 focus:ring-[#FF02CB]"
-                                    placeholder="••••••••"
-                                />
-                                <button
-                                    type="button"
-                                    className="absolute top-4 right-3 cursor-pointer bg-[#7039E6] p-1 rounded-full text-white"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    tabIndex={-1}
-                                >
-                                    {showPassword ? <FaEye /> : <FaEyeSlash />}
-                                </button>
-                            </div>
-                            {errors.password && (
-                                <p className="text-red-500 text-sm mt-1">Password is required</p>
-                            )}
-                        </div>
-
-                        <div className="flex justify-end">
-                            <Link
-                                to="/forgot-password"
-                                className="text-[#FF02CB] text-sm font-medium hover:text-[#FF0000] hover:underline transition"
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-white cursor-pointer"
+                                style={{ background: '#7C3AED' }}
+                                tabIndex={-1}
                             >
-                                Forgot Password?
-                            </Link>
+                                {showPassword ? <FaEye size={11} /> : <FaEyeSlash size={11} />}
+                            </button>
                         </div>
-
-                        {loginError && (
-                            <p className="text-red-500 text-sm text-center">{loginError}</p>
-                        )}
-
-                        <button
-                            type="submit"
-                            className="w-full md:text-xl cursor-pointer font-bold py-3 rounded-md px-4 text-white bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-500"
-                        >
-                            Login
-                        </button>
-                    </form>
-
-                    <div className="mt-4">
-                        <p className='text-center font-medium'>Or login with</p>
-                        <GoogleAuth></GoogleAuth>
+                        {errors.password && <p className="text-red-500 text-xs">Password is required</p>}
                     </div>
 
-                    <div className="flex justify-center items-center gap-1.5 mt-4">
-                        <p className="text-sm text-gray-700">Don't have an account?</p>
-                        <Link
-                            to="/register"
-                            className="text-blue-600 text-sm font-medium hover:text-violet-600 hover:underline hover:scale-105 transition"
-                        >
-                            Register
+                    {/* Forgot */}
+                    <div className="flex justify-end -mt-1">
+                        <Link to="/forgot-password" className="text-xs font-semibold text-orange-500 hover:text-orange-600 transition">
+                            Forgot Password?
                         </Link>
                     </div>
-                </div>
+
+                    {loginError && <p className="text-red-500 text-xs text-center">{loginError}</p>}
+
+                    {/* Submit */}
+                    <motion.button
+                        type="submit"
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full py-3.5 rounded-xl bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-300 font-extrabold text-sm tracking-wide cursor-pointer"
+                    >
+                        Login
+                    </motion.button>
+                </form>
+
+                {/* Divider */}
+                <p className="text-center text-xs text-gray-300 tracking-widest my-5">— or continue with —</p>
+
+                {/* Google */}
+                <GoogleAuth />
+
+                {/* Register link */}
+                <p className="text-center text-xs text-gray-400 mt-5">
+                    Don't have an account?{' '}
+                    <Link to="/register" className="text-violet-500 font-semibold hover:text-violet-700 transition">
+                        Register
+                    </Link>
+                </p>
             </motion.div>
         </div>
     );

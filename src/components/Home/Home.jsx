@@ -1,6 +1,7 @@
 import Footer from '../Footer';
 import LatestProducts from '../Products/LatestProducts';
 import Banner from './Banner';
+import FAQ from './FAQ';
 import Reviews from './Review/Reviews';
 import WhyChoose from './WhyChosse';
 
@@ -12,6 +13,7 @@ const Home = () => {
             <Banner></Banner>
             <LatestProducts latestProductsPromise={latestProductsPromise}></LatestProducts>
             <WhyChoose />
+            <FAQ/>
             <Reviews />
         </div>
     );

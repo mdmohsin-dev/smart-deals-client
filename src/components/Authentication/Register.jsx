@@ -2,141 +2,152 @@ import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
+import { motion } from 'framer-motion';
 import GoogleAuth from './GoogleAuth';
 
-const Register = () => {
+const inputClass =
+    'w-full border border-[#F1F5F9] bg-[#F8FAFC] rounded-xl px-4 py-3 text-sm text-gray-900 ' +
+    'focus:outline-none focus:border-orange-400 focus:bg-white transition-all duration-200 placeholder:text-gray-400';
 
+const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
-    const { handleSubmit, register, watch } = useForm()
+    const { handleSubmit, register, watch, formState: { errors } } = useForm();
+    const password = watch('password');
 
     const onSubmit = (data) => {
-        const { name, email, password, confirmPassword } = data
-
+        const { name, email, password } = data;
         createUser(email, password)
             .then(async result => {
-                console.log(result.user)
-                await updateUser(name)
+                console.log(result.user);
+                await updateUser(name);
             })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-
-    const password = watch("password")
+            .catch(err => console.log(err));
+    };
 
     return (
-        <div className="min-h-screen text-white flex items-center justify-center">
-            <div className="w-[90%] md:w-[70%] max-w-md"
+        <div
+            className="min-h-screen flex items-center justify-center px-4 py-10"
+            style={{ background: 'linear-gradient(160deg, #FFF7ED 0%, #FDF2FF 50%, #EEF2FF 100%)' }}
+        >
+            <motion.div
+                initial={{ y: -80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 80, damping: 14 }}
+                className="w-full max-w-md bg-white rounded-3xl p-8 md:p-10"
+                style={{ border: '1px solid rgba(0,0,0,0.06)' }}
             >
-                <div className="bg-white text-black rounded-2xl shadow-xl p-10">
-                    <div className="flex flex-col items-center mb-6">
-                        <h2 className="text-2xl md:text-4xl font-bold text-gray-800 pt-4 font-exo">Register Now</h2>
+                {/* Header */}
+                <span
+                    className="inline-block text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
+                    style={{ background: 'linear-gradient(135deg,#FDE68A,#FCA5A5)', color: '#92400E' }}
+                >
+                    ✦ Create account
+                </span>
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-1 font-exo">Register</h2>
+                <p className="text-sm text-gray-400 mb-7">Join us today, it's free!</p>
+
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    {/* Name */}
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-semibold text-gray-600">Full Name</label>
+                        <input
+                            type="text"
+                            {...register('name', { required: true })}
+                            className={inputClass}
+                            placeholder="John Doe"
+                        />
+                        {errors.name && <p className="text-red-500 text-xs">Name is required</p>}
                     </div>
 
-                    <form onSubmit={handleSubmit(onSubmit)}
-                        className="space-y-4">
-                        <div>
-                            <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
+                    {/* Email */}
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-semibold text-gray-600">Email</label>
+                        <input
+                            type="email"
+                            {...register('email', { required: true })}
+                            className={inputClass}
+                            placeholder="you@example.com"
+                        />
+                        {errors.email && <p className="text-red-500 text-xs">Email is required</p>}
+                    </div>
 
-                                Name
-                            </label>
+                    {/* Password */}
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-semibold text-gray-600">Password</label>
+                        <div className="relative">
                             <input
-                                type="text"
-                                {...register('name')}
-                                className="mt-1 w-full p-3 border border-gray-300 rounded-xl focus:bg-black text-black focus:text-white focus:outline-none focus:ring-2 focus:ring-[#FF02CB]"
-                                placeholder="you@example.com"
-                                required
+                                type={showPassword ? 'text' : 'password'}
+                                {...register('password', { required: true })}
+                                className={inputClass + ' pr-11'}
+                                placeholder="••••••••"
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-white cursor-pointer"
+                                style={{ background: '#7C3AED' }}
+                                tabIndex={-1}
+                            >
+                                {showPassword ? <FaEye size={11} /> : <FaEyeSlash size={11} />}
+                            </button>
                         </div>
-                        <div>
-                            <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-                                Email
-                            </label>
+                        {errors.password && <p className="text-red-500 text-xs">Password is required</p>}
+                    </div>
+
+                    {/* Confirm Password */}
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-semibold text-gray-600">Confirm Password</label>
+                        <div className="relative">
                             <input
-                                type="email"
-                                {...register('email')}
-                                className="mt-1 w-full p-3 border border-gray-300 rounded-xl focus:bg-black text-black focus:text-white focus:outline-none focus:ring-2 focus:ring-[#FF02CB]"
-                                placeholder="you@example.com"
-                                required
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                {...register('confirmPassword', {
+                                    required: true,
+                                    validate: value => value === password || 'Passwords do not match'
+                                })}
+                                className={inputClass + ' pr-11'}
+                                placeholder="••••••••"
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-white cursor-pointer"
+                                style={{ background: '#7C3AED' }}
+                                tabIndex={-1}
+                            >
+                                {showConfirmPassword ? <FaEye size={11} /> : <FaEyeSlash size={11} />}
+                            </button>
                         </div>
-
-                        <div>
-                            <div className="flex justify-between items-center">
-                                <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-
-                                    Password
-                                </label>
-                            </div>
-
-                            <div className="relative">
-                                <input
-                                    {...register('password')}
-                                    type={showPassword ? 'text' : 'password'}
-                                    className="mt-1 w-full p-3 border border-gray-300 rounded-xl focus:bg-black text-black focus:text-white focus:outline-none focus:ring-2 focus:ring-[#FF02CB]"
-                                    placeholder="••••••••"
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    className="absolute top-4 right-3 cursor-pointer bg-[#7039E6] p-1 rounded-full text-white"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                >
-                                    {showPassword ? <FaEye /> : <FaEyeSlash />}
-                                </button>
-                            </div>
-                        </div>
-
-
-                        <div>
-                            <label className="text-sm md:text-lg font-medium text-gray-700 flex items-center gap-2">
-
-                                Confirm Password
-                            </label>
-                            <div className="relative">
-                                <input
-                                    {...register('confirmPassword', { validate: value => value === password || "Passwords do not match" })}
-                                    type={showConfirmPassword ? 'text' : 'password'}
-                                    className={`mt-1 w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF02CB]`}
-                                    placeholder="••••••••"
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    className="absolute top-4 right-3 cursor-pointer bg-[#7039E6] p-1 rounded-full text-white"
-                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                    tabIndex={-1}
-                                >
-                                    {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
-                                </button>
-                            </div>
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full md:text-xl cursor-pointer font-bold py-3 rounded-md px-4 text-white bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-500">
-                            Sign Up
-                        </button>
-                    </form>
-
-                    <div className="mt-4">
-                        <p className='text-center font-medium'>Or sign up with</p>
-                        <GoogleAuth></GoogleAuth>
+                        {errors.confirmPassword && (
+                            <p className="text-red-500 text-xs">{errors.confirmPassword.message}</p>
+                        )}
                     </div>
 
-                    <div className="flex justify-center items-center gap-1.5 mt-4">
-                        <p className="text-sm text-gray-700">Already have an account?</p>
-                        <Link
-                            to="/login"
-                            className="text-blue-600 text-sm font-medium hover:text-violet-600 hover:underline hover:scale-105 transition"
-                        >
-                            Login
-                        </Link>
-                    </div>
-                </div>
-            </div>
+                    {/* Submit */}
+                    <motion.button
+                        type="submit"
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full py-3.5 rounded-xl bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-300 font-extrabold text-sm tracking-wide cursor-pointer"
+                    >
+                        Sing Up
+                    </motion.button>
+                </form>
+
+                {/* Divider */}
+                <p className="text-center text-xs text-gray-300 tracking-widest my-5">— or continue with —</p>
+
+                {/* Google */}
+                <GoogleAuth />
+
+                {/* Login link */}
+                <p className="text-center text-xs text-gray-400 mt-5">
+                    Already have an account?{' '}
+                    <Link to="/login" className="text-violet-500 font-semibold hover:text-violet-700 transition">
+                        Login
+                    </Link>
+                </p>
+            </motion.div>
         </div>
     );
 };

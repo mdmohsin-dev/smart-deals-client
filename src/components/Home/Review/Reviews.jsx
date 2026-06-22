@@ -39,7 +39,7 @@ const Reviews = () => {
     }
 
     return (
-        <div className='max-w-350 w-11/12 mx-auto mt-36 text-black'>
+        <div className='max-w-350 w-11/12 mx-auto my-28 text-black'>
             <div className='text-center lg:w-8/12 w-full mx-auto'>
                 <h3 className='text-4xl font-bold'>What our customers are sayings</h3>
                 <p className='pt-5'>Enhance posture, mobility, and well-being effortlessly with Posture Pro. Achieve proper alignment, reduce pain, and strengthen your body with ease!</p>

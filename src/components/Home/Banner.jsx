@@ -1,6 +1,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import car from "../../assets/red-car-3.png"
 import BrandLogoSlider from "../Brandlogoslider";
+import { Link } from "react-router";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function CarRentalBanner() {
     const prefersReducedMotion = useReducedMotion();
@@ -35,7 +37,7 @@ export default function CarRentalBanner() {
 
     return (
         <section className="relative w-full overflow-hidden bg-white">
-            <div className="my-20">
+            <div className="lg:my-20">
                 <div className="mx-auto flex max-w-360 flex-col-reverse items-center gap-10 py-12 w-11/12 lg:flex-row lg:gap-6">
                     {/* Left: text content */}
                     <motion.div
@@ -80,6 +82,15 @@ export default function CarRentalBanner() {
                                 </p>
                                 <p className="mt-1 text-sm text-gray-500">Clients</p>
                             </div>
+
+                            <Link
+                                to="/all-products"
+                                className="group items-center flex gap-2 rounded-md py-3 px-5 font-medium text-white bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-500 overflow-hidden"
+                            >
+                                Explore Cars
+                                <FaArrowRight className="hidden md:flex transition-all duration-700 group-hover:rotate-[360deg] group-hover:translate-x-6 group-hover:opacity-0" />
+                            </Link>
+
                         </motion.div>
                     </motion.div>
 
