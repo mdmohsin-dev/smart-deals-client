@@ -20,7 +20,7 @@ export default function Navbar() {
       <li className="hover:text-blue-600 font-semibold"><NavLink to="/all-products">All Products</NavLink></li>
       {user && (
         <>
-          <li className="hover:text-blue-600 font-semibold"><NavLink to="/myProducts">My Products</NavLink></li>
+          {/* <li className="hover:text-blue-600 font-semibold"><NavLink to="/myProducts">My Products</NavLink></li> */}
           <li className="hover:text-blue-600 font-semibold"><NavLink to="/myBids">My Bids</NavLink></li>
           <li className="hover:text-blue-600 font-semibold"><NavLink to="/createProduct">Create Product</NavLink></li>
         </>

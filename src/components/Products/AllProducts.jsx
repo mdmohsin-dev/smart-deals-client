@@ -33,8 +33,8 @@ const AllProducts = () => {
     }
 
     return (
-        <div className="max-w-360 mx-auto px-4 py-10 text-black">
-            <h2 className="text-2xl font-semibold mb-6 text-center md:mt-28">All Products</h2>
+        <div className="max-w-360 mx-auto px-4 lg:py-10 text-black mb-10">
+            <h2 className="text-3xl font-semibold mb-8 text-center mt-4">All Products</h2>
 
             {products.length === 0 ? (
                 <p className="text-center text-gray-500 mt-6">No products found.</p>
