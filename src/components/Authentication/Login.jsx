@@ -14,17 +14,18 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState('');
 
-    const { signIn } = useAuth();
+    const { loginUser } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from || '/';
+
+    const from = location.state?.from?.pathname || '/';
 
     const { handleSubmit, register, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         const { email, password } = data;
         setLoginError('');
-        signIn(email, password)
+        loginUser(email, password)
             .then(result => {
                 console.log(result.user);
                 navigate(from, { replace: true });
@@ -45,8 +46,10 @@ const Login = () => {
                 style={{ border: '1px solid rgba(0,0,0,0.06)' }}
             >
                 {/* Header */}
-                <span className="inline-block text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
-                    style={{ background: 'linear-gradient(135deg,#FDE68A,#FCA5A5)', color: '#92400E' }}>
+                <span
+                    className="inline-block text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
+                    style={{ background: 'linear-gradient(135deg,#FDE68A,#FCA5A5)', color: '#92400E' }}
+                >
                     ✦ Welcome back
                 </span>
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-1 font-exo">Sign in</h2>
@@ -90,18 +93,23 @@ const Login = () => {
 
                     {/* Forgot */}
                     <div className="flex justify-end -mt-1">
-                        <Link to="/forgot-password" className="text-xs font-semibold text-orange-500 hover:text-orange-600 transition">
+                        <Link
+                            to="/forgot-password"
+                            className="text-xs font-semibold text-orange-500 hover:text-orange-600 transition"
+                        >
                             Forgot Password?
                         </Link>
                     </div>
 
-                    {loginError && <p className="text-red-500 text-xs text-center">{loginError}</p>}
+                    {loginError && (
+                        <p className="text-red-500 text-xs text-center">{loginError}</p>
+                    )}
 
                     {/* Submit */}
                     <motion.button
                         type="submit"
                         whileTap={{ scale: 0.98 }}
-                        className="w-full py-3.5 rounded-xl bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-300 font-extrabold text-sm tracking-wide cursor-pointer"
+                        className="w-full py-3.5 rounded-xl bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-300 font-extrabold text-sm tracking-wide cursor-pointer text-white"
                     >
                         Login
                     </motion.button>

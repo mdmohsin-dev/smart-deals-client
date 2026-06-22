@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import GoogleAuth from './GoogleAuth';
+import useAuth from '../../hooks/useAuth';
 
 const inputClass =
     'w-full border border-[#F1F5F9] bg-[#F8FAFC] rounded-xl px-4 py-3 text-sm text-gray-900 ' +
@@ -13,6 +14,12 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+    const { createUser } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
     const { handleSubmit, register, watch, formState: { errors } } = useForm();
     const password = watch('password');
 
@@ -21,7 +28,8 @@ const Register = () => {
         createUser(email, password)
             .then(async result => {
                 console.log(result.user);
-                await updateUser(name);
+                // await updateUser(name);
+                navigate(from, { replace: true });
             })
             .catch(err => console.log(err));
     };
@@ -128,9 +136,9 @@ const Register = () => {
                     <motion.button
                         type="submit"
                         whileTap={{ scale: 0.98 }}
-                        className="w-full py-3.5 rounded-xl bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-300 font-extrabold text-sm tracking-wide cursor-pointer"
+                        className="w-full py-3.5 rounded-xl bg-linear-to-r from-blue-600 to-violet-600 hover:rounded-3xl transition-all duration-300 font-extrabold text-sm tracking-wide cursor-pointer text-white"
                     >
-                        Sing Up
+                        Sign Up
                     </motion.button>
                 </form>
 

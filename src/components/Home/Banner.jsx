@@ -31,7 +31,7 @@ export default function CarRentalBanner() {
         visible: {
             opacity: 1,
             x: 0,
-            transition: { duration: 2, ease: [0.22, 1, 0.36, 1], delay: 0.15 },
+            transition: { duration: 2, ease: [0.22, 1, 0.36, 1], delay: 0.5 },
         },
     };
 
